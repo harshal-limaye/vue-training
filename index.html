@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Training</title>
+    <!-- <style>
+        #root {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .red {
+            border: 4px solid red;
+        }
+        .black {
+            border: 4px solid black;
+        }
+    </style> -->
+    <style>
+        .userInfo {
+            width: 300px;
+            height: 300px;
+            border: 1px solid;
+            padding: 10px;
+        }
+        .wrapper {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <user-card 
+                v-for="user in users"
+                :name="user.name"
+                :job-title="user.jobTitle"
+                :country="user.country"
+                @user-selected="selected"
+            ></user-card>
+        </div>
+        <!-- <input type="text" placeholder="Search" v-model="search" />
+        <h1>You are searching for: {{ search }}</h1> -->
+        <!-- <div :class="{ 'red': position === 'Inside', 'black': position === 'Outside' }" @mouseenter="enter" @mouseleave="leave" id="root">
+            {{position}}
+        </div> -->
+        <!-- <h1>{{count}}</h1>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button> -->
+        <!-- <h1>{{title.split(" ").join("-").toLowerCase()}}</h1>
+        <h3>This is a "{{title}}" program!</h3>
+        <h2>{{ 1 + 1 }}</h2> -->
+        <!-- <h2>{{ isHelloWorld ? title : 'N/A' }}</h2>
+        <a :href="href" :target="type">Go To Google!</a>
+        <h3 v-if="age > 21">You're allowed to drink as well as drive but not at the same time!</h3>
+        <h3 v-else-if="age > 18 && age < 21">You're allowed to drive but not drink!</h3>
+        <h3 v-else>You're not allowed to drink or drive!</h3>
+        <ul>
+            <li v-for="country of countries">{{country}}</li>
+        </ul>
+        <ul>
+            <li v-for="(city, country) in cities">{{country}} - {{city}}</li>
+        </ul> -->
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app = Vue.createApp({
+            data: () => {
+                return {
+                    title: 'Hello World!',
+                    isHelloWorld: false,
+                    href: 'https://www.google.com',
+                    type: '_blank',
+                    age: 19,
+                    countries: ['India', 'Russia', 'Canada', 'Japan', 'Brazil', 'Nepal'],
+                    cities: {
+                        'India': 'Mumbai',
+                        'Nepal': 'Kathmandu',
+                        'Canada': 'Waterloo',
+                        'Japan': 'Tokyo'
+                    },
+                    count: 0,
+                    position: 'Outside',
+                    search: '',
+                    users: [
+                        {
+                            name: 'Harshal Limaye',
+                            jobTitle: 'Software Developer',
+                            country: 'India'
+                        },
+                        {
+                            name: 'John Doe',
+                            jobTitle: 'Manager',
+                            country: 'USA'
+                        },
+                        {
+                            name: 'Jane Doe',
+                            jobTitle: 'Customer Support - Executive',
+                            country: 'USA'
+                        },
+                        {
+                            name: 'Foo Bar',
+                            jobTitle: 'Chef',
+                            country: 'Nepal'
+                        },
+                    ]
+                }
+            },
+            methods: {
+                increment() {
+                    this.count++;
+                },
+                decrement() {
+                    if (this.count > 0) {
+                        this.count--;
+                    }
+                },
+                enter() {
+                    this.position = 'Inside';
+                },
+                leave() {
+                    this.position = 'Outside';
+                },
+                selected(name, country) {
+                    alert(`${name} from ${country} has been selected!`);
+                }
+            }
+        });
+    </script>
+    <script src="./components/user-card.js"></script>
+    <script>app.mount('#app')</script>
+</body>
+</html>
